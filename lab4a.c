@@ -33,7 +33,7 @@ typedef struct _graph{
 
 // also initalizes matrix
 void readMatrix(FILE *input, graph *output) {
-	int i, j, size;
+	int i, j, size, vertices, edges;
 	
 	fscanf(input, %d, &size);
 	
@@ -53,8 +53,13 @@ void readMatrix(FILE *input, graph *output) {
 	for(i = 0; i < size; i++) {
 		for(j = 0; j < size; j++) {
 		  fscanf(input, "%d", output->matrix[i][j]);
+		  if(output->matrix[i][j] > 0)
+			edges++;
 		}
 	}
+	
+	output->edges = edges/2;
+	output->vertices = size; // MAYBE I'M NOT SURE I ACTUALLY DIDN'T GET THAT
 		  
 	return;
 	
