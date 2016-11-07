@@ -21,13 +21,13 @@
 
 
 /* Header Inclusions                                              */
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 
 
 /* Include Header File with Data Type and Function Prototypes     */
-#include"LinkedList.h"
+#include "LinkedList.h"
 
 
 
@@ -38,8 +38,7 @@
  *                 1) Pointer to the item of the linked list node
  *                 2) Pointer to next node of the linked list.
  */
-struct LinkedListStruct
-{
+struct LinkedListStruct {
   Item this;
   LinkedList * next;
 };
@@ -59,8 +58,7 @@ struct LinkedListStruct
  *  Return value:
  *    Returns the pointer to a new linked list.
  */
-LinkedList * initLinkedList(void)
-{
+LinkedList * initLinkedList(void) {
   return NULL;
 }
 
@@ -197,8 +195,7 @@ Item getItemLinkedList(LinkedList * node)
  *  Return value:
  *    Returns the pointer to the node.
  */
-LinkedList * insertUnsortedLinkedList(LinkedList * next, Item this)
-{
+LinkedList * insertUnsortedLinkedList(LinkedList * next, Item this) {
   LinkedList * new;
 
   /* Memory allocation                                            */
@@ -245,16 +242,27 @@ LinkedList * insertUnsortedLinkedList(LinkedList * next, Item this)
  *  Return value:
  *    Returns the pointer to the first node of the sorted linked list.
  */
-LinkedList * insertSortedLinkedList(LinkedList * first,
-				    Item item,
-				    int (* comparisonItemFnt)
-				    (Item item1, Item item2),
-				    int * err)
-{
+LinkedList * insertSortedLinkedList(LinkedList * first, Item item, int (* comparisonItemFnt), (Item item1, Item item2), int * err) {
+	LinkedList *aux, *new_node, *new_first;
+	
+	if(item == NULL)
+		*err = 1;
+	
+	for(aux = first; aux != NULL; aux = aux->next) {
+		if(comparisonItemFnt(item, aux) > 0) {
+			new_node = insertUnsortedLinkedList(aux->next, item);
+			if(new_node == NULL)
+				*err = 2;
+				
+			aux->next = new_node;
+			*err = 0;
+			
+			if(aux = first)
+				new_first = new_node;
+			else
+				new_first = first;
+		}
+	}
 
-
-
-
-
-  return NULL;
+	return new_first;
 }
