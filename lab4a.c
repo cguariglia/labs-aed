@@ -25,62 +25,59 @@
 #include <stdio.h>
 #include <string.h>
 #include "defs.h"
+#include "lab4a.h"
 
-typedef struct _graph{
-	int edges;
-	int vertices;
-	int matrix[][];
-} graph;
+
+
 
 // also initalizes matrix
 void readMatrix(FILE *input, graph *output) {
-	int i, j, size, vertices, edges;
+	int i, j, size, edges=0;
 	
-	fscanf(input, %d, &size);
+	
+	fscanf(input, "%d", &size);
 	
 	output->edges = 0;
-	output->vertices = 0; 
-	
+	output->vertices = 0; 	
 	output->matrix = (int **)malloc(size * sizeof(int *));
+
 	if(output->matrix == NULL)
 		exit(1);
 	
 	for(i = 0; i < size; i++) {
-		output->matriz[i] = (int *)malloc(size * sizeof(int));
+		output->matrix[i] = (int *)malloc(size * sizeof(int));
 		if(output->matrix[i] == NULL)
 			exit(1);
 	}
 	
 	for(i = 0; i < size; i++) {
 		for(j = 0; j < size; j++) {
-		  fscanf(input, "%d", output->matrix[i][j]);
+		  fscanf(input, "%d",&output->matrix[i][j]);
 		  if(output->matrix[i][j] > 0)
 			edges++;
 		}
 	}
-	
+
 	output->edges = edges/2;
-	output->vertices = size; // MAYBE I'M NOT SURE I ACTUALLY DIDN'T GET THAT
-		  
+	output->vertices = size; // MAYBE I'M NOT SURE I ACTUALLY DIDN'T GET THAT R:. It good Carolina Maria
 	return;
 	
 }
-
-void printDensity(graph *g) {
+void printDensity(graph g) {
 	
-	printf("Density of graph: %f\n", (float)((2 * g->edges)/g->vertices));
+	printf("Density of graph: %f\n", (float)((2 * g.edges)/g.vertices));
 	
 	return;
 }
 
-void printMaxDegree(graph *g, int size) {
+void printMaxDegree(graph g, int size) {
 	int i, j, sum, degree = 0;
 	
 	for(i = 0; i < size; i++) {
 		sum = 0;
 		
 		for(j = 0; j < size; j++)
-			if(g->matrix[i][j] != 0)
+			if(g.matrix[i][j] != 0)
 				sum++;
 			
 		if(sum > degree)
@@ -110,9 +107,33 @@ char* outputFileExtention(char * name_input){
 	return name_output;
 }
 
-void writeFile(char *oldfile) {
+
+void printOutFile(FILE *output, graph g){
+
+	int i=0, j=0;
+	fprintf(output, "%d\n",g.vertices);
+	fprintf(output, "%d\n",g.edges);
+
+	for(i = 0; i < g.vertices; i++) {
+
+		for(j = 0; j < i; j++) {
+		
+			if(g.matrix[i][j]!=0)
+				fprintf(output, "%d %d %d\n",j, i, g.matrix[i][j]);
+		}
+			 
+	}
+	
+ return;
+}
+	
+	
+
+
+
+void writeFile(char *oldfile, graph g) {
 	FILE *f;
-	char *newfile;
+	char *filename;
 	
 	filename = outputFileExtention(oldfile);
 	
@@ -121,7 +142,8 @@ void writeFile(char *oldfile) {
 		exit(1);
 		
 	
-		
+    printOutFile(f,g);
+    
 	fclose(f);
 	
 	return;

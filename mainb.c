@@ -23,9 +23,24 @@
 
 
 #include <stdio.h>
+#include <stdio.h>
+#include "lab4b.h"
 
 int main(int argc, char **argv)
 {
+	graph graf2;
+	FILE *fp_input;
+	graph grafo1;
+	
+	
+	fp_input=fopen(argv[1], "r");
+	
+	
+   graf2= initGraph(fp_input);
+	readMatrix(fp_input, &graf2);
+	 writeFile(argv[1], graf2);
+	
+	
 	
 	return 0;
 }

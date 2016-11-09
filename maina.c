@@ -27,6 +27,24 @@
 
 int main(int argc, char **argv) {
 	
+	FILE *fp_input;
+	graph grafo1;
+	
+	
+	fp_input=fopen(argv[1], "r");
+	
+	
+	
+	readMatrix(fp_input, &grafo1);
+
+	printDensity(grafo1);
+	printMaxDegree(grafo1, grafo1.vertices);
+	
+	writeFile(argv[1], grafo1);
+	
+
+	
+	
 	return 0;
 }
 
