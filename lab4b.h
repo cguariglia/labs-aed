@@ -3,34 +3,28 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "defs.h"
 #include "LinkedList.h"
 
-
-
-typedef struct _link link;
-
-struct _link {
+typedef struct _link {
 	int vertex;
 	int weight;
-	_link *next;
-}
+	struct _link *next;
+} link;
 
-struct graph{
+typedef struct{
 	int edges;
 	int vertices;
 	link **adj;
-};
-
-
+} graph;
 
 link *newLink(int v, link *next);
 graph *initGraph(FILE *input);
 void readMatrix(FILE *input, graph *output);
 void blabla(graph *output, int valorv1,int valorv2, int vertices_num, int weight);
 
-
-void writeFile(char *oldfile, graph g);
+void writeFile(char *oldfile, graph *g);
 char* outputFileExtention(char * name_input);
+
+void printOutFile(FILE *output, graph *g);
 
 #endif

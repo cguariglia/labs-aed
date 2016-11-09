@@ -28,19 +28,14 @@
 
 int main(int argc, char **argv)
 {
-	graph graf2;
+	graph *graph2;
 	FILE *fp_input;
-	graph grafo1;
 	
+	fp_input = fopen(argv[1], "r");
 	
-	fp_input=fopen(argv[1], "r");
-	
-	
-   graf2= initGraph(fp_input);
-	readMatrix(fp_input, &graf2);
-	 writeFile(argv[1], graf2);
-	
-	
+	graph2 = initGraph(fp_input);
+	readMatrix(fp_input, graph2);
+	writeFile(argv[1], graph2);
 	
 	return 0;
 }

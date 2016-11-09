@@ -4,9 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-
-
 typedef struct _graph{
 	int edges;
 	int vertices;
