@@ -28,9 +28,10 @@
 
 
 
-link *newLink(int v, link *next) {
+link *newLink(int v, int w, link *next) {
 	link *new = (link *)malloc(sizeof(link));
 	new->vertex = v;
+	new->weight = w;
 	new->next = next;
 	
 	return new;
@@ -55,16 +56,14 @@ graph *initGraph(FILE *input) {
 }
 
 void readMatrix(FILE *input, graph *output) {
-	int v1, v2, weight, vertices_num, edges_num;
+	int v1, v2, weight, edges_num;
 	
 	fscanf(input, "%d", &edges_num);
 	output->edges = edges_num;
 	
-	vertices_num = output->vertices;
-	
-	while(fscanf(input, "%d %d %d", &v1, &v2, &weight) == 1) {
-		blabla(output,v1,v2, vertices_num, weight);
-		blabla(output,v2,v1, vertices_num, weight);
+	while(fscanf(input, "%d %d %d", &v1, &v2, &weight) == 3) {
+		insert(output, v1, v2, weight);
+		insert(output, v2, v1, weight);
  	}
 	  
 	return;
@@ -73,14 +72,22 @@ void readMatrix(FILE *input, graph *output) {
 
 
 
-void blabla(graph *output, int valorv1, int valorv2, int vertices_num, int weight){
+void insert(graph *output, int valorv1, int valorv2, int weight) {
 	link *aux = NULL;
-
+	
 	aux = output->adj[valorv1];
-	aux = newLink(vertices_num, aux);
-	aux->weight = weight;
-	aux->vertex = valorv2;
-	output->adj[valorv1] = aux;
+	
+	if(output->adj[valorv1] == NULL) {
+		output->adj[valorv1] = newLink(valorv2, weight, NULL);
+		return;
+	}
+	
+	for(aux = output->adj[valorv1]; aux != NULL; aux = aux->next) {
+		if(aux->next == NULL) {
+			aux->next = newLink(valorv2, weight, NULL);
+			return;
+		}
+	}
 
 	return;
 }
@@ -129,14 +136,12 @@ void printOutFile(FILE *output, graph *g){
 	link *aux;
 	
 	fprintf(output, "%d\n", g->vertices);
-	printf("hi there: %d\n", g->adj[0]->weight);
 	
 	for(i = 0; i < g->vertices; i++) {
 		for(aux = g->adj[i]; aux != NULL; aux = aux->next) {
 			fprintf(output, "%d:%d ", aux->vertex, aux->weight);
-			printf("%d:%d ", aux->vertex, aux->weight);
 		}
-		fprintf(output, "-1\n ");
+		fprintf(output, "-1\n");
 	}
 				
  return;

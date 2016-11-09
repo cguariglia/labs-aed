@@ -17,10 +17,10 @@ typedef struct{
 	link **adj;
 } graph;
 
-link *newLink(int v, link *next);
+link *newLink(int v, int w, link *next);
 graph *initGraph(FILE *input);
 void readMatrix(FILE *input, graph *output);
-void blabla(graph *output, int valorv1,int valorv2, int vertices_num, int weight);
+void insert(graph *output, int valorv1,int valorv2, int weight);
 
 void writeFile(char *oldfile, graph *g);
 char* outputFileExtention(char * name_input);
