@@ -126,6 +126,7 @@ void writeFile(char *oldfile, graph *g) {
     printOutFile(f, g);
     
 	fclose(f);
+	free(filename);
 	
 	return;
 }
@@ -147,4 +148,21 @@ void printOutFile(FILE *output, graph *g){
  return;
 }
 	
+void freeEverything(graph *g) {
+	int i;
+	link *aux, *next;
 	
+	for(i = 0; i < g->vertices; i++) {
+		aux = g->adj[i];
+		while(aux != NULL) {
+			next = aux->next;
+			free(aux);
+			aux = next;
+		}
+	}
+	
+	free(g->adj);
+	free(g);
+	
+	return;
+}

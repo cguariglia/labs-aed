@@ -37,6 +37,9 @@ int main(int argc, char **argv)
 	readMatrix(fp_input, graph2);
 	writeFile(argv[1], graph2);
 	
+	fclose(fp_input);
+	freeEverything(graph2);
+	
 	return 0;
 }
 

@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
 	graph grafo1;
 	
 	
-	fp_input=fopen(argv[1], "r");
+	fp_input = fopen(argv[1], "r");
 	
 	
 	
@@ -42,7 +42,8 @@ int main(int argc, char **argv) {
 	
 	writeFile(argv[1], grafo1);
 	
-
+	fclose(fp_input);
+	freeMatrix(&grafo1);
 	
 	
 	return 0;

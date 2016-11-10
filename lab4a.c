@@ -65,7 +65,7 @@ void readMatrix(FILE *input, graph *output) {
 }
 void printDensity(graph g) {
 	
-	printf("Density of graph: %f\n", (float)((2 * g.edges)/g.vertices));
+	printf("Density of graph: %f\n", ((2.0 * g.edges)/g.vertices));
 	
 	return;
 }
@@ -124,13 +124,10 @@ void printOutFile(FILE *output, graph g){
 			 
 	}
 	
- return;
+	return;
 }
 	
 	
-
-
-
 void writeFile(char *oldfile, graph g) {
 	FILE *f;
 	char *filename;
@@ -145,6 +142,18 @@ void writeFile(char *oldfile, graph g) {
     printOutFile(f,g);
     
 	fclose(f);
+	free(filename);
+	
+	return;
+}
+
+void freeMatrix(graph *g) {
+	int i;
+	
+	for(i = 0; i < g->vertices; i++)
+		free(g->matrix[i]);
+		
+	free(g->matrix);
 	
 	return;
 }

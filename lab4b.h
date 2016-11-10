@@ -26,5 +26,6 @@ void writeFile(char *oldfile, graph *g);
 char* outputFileExtention(char * name_input);
 
 void printOutFile(FILE *output, graph *g);
+void freeEverything(graph *g);
 
 #endif

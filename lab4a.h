@@ -16,5 +16,6 @@ void printMaxDegree(graph g, int size);
 char* outputFileExtention(char * name_input);
 void printOutFile(FILE *output, graph g);
 void writeFile(char *oldfile, graph g);
+void freeMatrix(graph *g);
 
 #endif
