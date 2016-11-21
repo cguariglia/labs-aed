@@ -58,7 +58,7 @@ int main(int argc, char **argv)
   MostraDistribuicao(tabela, &h);
   printf("\nNumber of diferent words: %d\n", h.numPalavras);
   printf("Number of comparisons: %d\n", h.num_comp);
-  printf("Size of the bigger list: %d\n", h.max_size);
+  printf("Size of the biggest list: %d\n", h.max_size);
   printf("Number of empty lists: %d\n", h.empty);
 
   LibertarTabela(h.m, tabela);

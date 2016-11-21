@@ -306,7 +306,7 @@ void EscreveFicheiro(Hash * tabela, char *ficheiro, int m)
 
 void MostraDistribuicao(Hash * tabela, Info * h)
 {
-  int i, j, numPal;
+  int i, j, numPal, empty_lists = 0, biggest_list = 0;
   No *aux;
 
   printf("\n\tDistribution of words in the hash table\n");
@@ -317,7 +317,7 @@ void MostraDistribuicao(Hash * tabela, Info * h)
    * and update h according
    *******************************************************************/
 
-  for (i = 0; i < h->m; i++) {
+for (i = 0; i < h->m; i++) {
 
     aux = tabela[i];
     numPal = 0;
@@ -327,14 +327,21 @@ void MostraDistribuicao(Hash * tabela, Info * h)
       numPal++;
     }
 
-
+    if(numPal > biggest_list)
+        biggest_list = numPal;
+    else if(numPal == 0)
+        empty_lists++;
 
     printf("[%2d] Np=  %d ", i, h->num_pal[i]);
     for (j = 0; j < numPal; j++)
       printf("#");
 
     printf("\n");
-  }
+    
+    }
+
+    h->max_size = biggest_list;
+    h->empty = empty_lists;
 
   return;
 }

@@ -1,0 +1,6 @@
+PESO = 153 e m = 255 => maior lista = 123 e 250 listas vazias
+PESO = 153 e m = 257 => maior lista = 7 e 27 listas vazias
+PESO = 765 e m = 12 => maior lista = 144 e 8 listas vazias
+
+Se a funcao de dispersao fosse ideal (ASSUMO QUE) haveriam 0 listas vazias, porque nunca haveriam colisoes, e a lista maior seria 1. (?????)
+Ha um grande aumento entre m = 255 e m = 257 porque 255 nao e primo, ao contrario de 257. Numeros primos sao vantajosos porque assim as hashes nao dependem apenas do ultimo elemento (neste caso, a ultima letra).

@@ -16,7 +16,7 @@ etags::
 	etags *.h *.c
 
 clean::
-	rm -f *.o core a.out hashpal *~
+	rm -f *.o core a.out *.palavras hashpal *~
 
 
 
