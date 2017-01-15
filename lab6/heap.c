@@ -238,6 +238,7 @@ void FreeHeap(Heap * h)
    * Insert code here
    ****************************************************/
 
+    free(h);
     return;
 }
 
@@ -377,8 +378,6 @@ void CleanHeap(Heap * h) {
     
     for(i = 0; i < h->n_elements; i++)
         free(h->heapdata[i]);
-    free(h->heapdata);
-    free(h);
     
   return;
 }
@@ -464,7 +463,7 @@ void HeapSort(Heap * h) {
     int top;
     int *aux;
     
-    top = h->n_elements;
+    top = h->n_elements - 1;
     
     Heapify(h);
         
@@ -473,7 +472,6 @@ void HeapSort(Heap * h) {
         h->heapdata[0] = h->heapdata[top];
         h->heapdata[top] = aux;
         
-        printf("started from the bottom now we here %d\n", top);
         --top;
         fixDown(h, top);
     }

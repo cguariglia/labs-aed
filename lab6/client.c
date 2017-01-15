@@ -95,8 +95,6 @@ void InsertNum(Heap * h)
     printf("\nFinal Heap\n");
     PrintHeap(h);
   }
-  
-  free(num);
 
   return;
 }
